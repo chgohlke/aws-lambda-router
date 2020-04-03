@@ -1,6 +1,6 @@
 {
-  "name": "aws-lambda-router",
-  "version": "0.6.1",
+  "name": "@chgohlke/aws-lambda-router",
+  "version": "0.6.9",
   "description": "AWS lambda router",
   "main": "index.js",
   "types": "index.d.ts",
@@ -9,7 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spring-media/aws-lambda-router.git"
+    "url": "git+https://github.com/chgohlke/aws-lambda-router.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "aws",
