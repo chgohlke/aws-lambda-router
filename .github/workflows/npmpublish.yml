@@ -16,5 +16,5 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 8
-      - run: npm ci
-      - run: npm test
+      - run: yarn install
+      - run: yarn test
