@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: Checkout Branch
         uses: actions/checkout@v2
-
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      
       - name: Install Node
         uses: actions/setup-node@v1
         with:
@@ -28,11 +29,12 @@ jobs:
 
       - name: echo
         run: |
+          git describe --tags
           git describe --abbrev=0
 
       - name: Patch version
         run: |
-          TAG=$(git describe --abbrev=0)
+          TAG=$(git describe --tags)
           echo $TAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
