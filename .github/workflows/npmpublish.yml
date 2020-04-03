@@ -26,3 +26,21 @@ jobs:
 
       - name: Test
         run: yarn test
+
+      - name: Build
+        run: yarn build
+
+      - name: Patch version
+        run: |
+          git config --global user.name "chgohlke"
+          git config --global user.email "christian.gohlke@spring-media.de"
+          git remote add publisher "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          npm version patch -m "Automatically updated npm version to %s"
+          git push origin HEAD:master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
