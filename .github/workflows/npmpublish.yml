@@ -22,7 +22,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Install Dependencies
-         run: yarn install
+        run: yarn install
 
       - name: Test
         run: yarn test
