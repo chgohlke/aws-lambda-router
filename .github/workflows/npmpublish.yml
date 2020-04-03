@@ -4,9 +4,8 @@
 name: Deployment
 
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -27,17 +26,13 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: echo
+        run: |
+          git describe --abbrev=0
+
       - name: Patch version
         run: |
-          git config --global user.name "chgohlke"
-          git config --global user.email "christian.gohlke@spring-media.de"
-          git remote add publisher "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          npm version patch -m "Automatically updated npm version to %s"
-          git push origin HEAD:master
+          TAG=$(git describe --abbrev=0)
+          echo $TAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
