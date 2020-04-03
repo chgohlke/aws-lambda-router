@@ -27,9 +27,6 @@ jobs:
       - name: Test
         run: yarn test
 
-      - name: Build
-        run: yarn build
-
       - name: Patch version
         run: |
           git config --global user.name "chgohlke"
